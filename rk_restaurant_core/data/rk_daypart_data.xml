@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="daypart_breakfast" model="rk.daypart">
+            <field name="name">Breakfast</field>
+            <field name="code">BREAKFAST</field>
+            <field name="sequence">10</field>
+            <field name="start_hour">6.0</field>
+            <field name="end_hour">11.0</field>
+            <field name="color">4</field>
+        </record>
+        <record id="daypart_lunch" model="rk.daypart">
+            <field name="name">Lunch</field>
+            <field name="code">LUNCH</field>
+            <field name="sequence">20</field>
+            <field name="start_hour">11.0</field>
+            <field name="end_hour">15.0</field>
+            <field name="color">2</field>
+        </record>
+        <record id="daypart_afternoon" model="rk.daypart">
+            <field name="name">Afternoon</field>
+            <field name="code">AFTERNOON</field>
+            <field name="sequence">30</field>
+            <field name="start_hour">15.0</field>
+            <field name="end_hour">17.0</field>
+            <field name="color">7</field>
+        </record>
+        <record id="daypart_dinner" model="rk.daypart">
+            <field name="name">Dinner</field>
+            <field name="code">DINNER</field>
+            <field name="sequence">40</field>
+            <field name="start_hour">17.0</field>
+            <field name="end_hour">23.0</field>
+            <field name="color">1</field>
+        </record>
+        <record id="daypart_late" model="rk.daypart">
+            <field name="name">Late Night</field>
+            <field name="code">LATE</field>
+            <field name="sequence">50</field>
+            <field name="start_hour">23.0</field>
+            <field name="end_hour">2.0</field>
+            <field name="color">6</field>
+        </record>
+        <record id="daypart_wholesale" model="rk.daypart">
+            <field name="name">Production Shift</field>
+            <field name="code">PRODUCTION</field>
+            <field name="sequence">60</field>
+            <field name="start_hour">2.0</field>
+            <field name="end_hour">6.0</field>
+            <field name="color">8</field>
+        </record>
+    </data>
+</odoo>

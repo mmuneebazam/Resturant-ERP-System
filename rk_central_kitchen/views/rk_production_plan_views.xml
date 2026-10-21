@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_production_plan_list" model="ir.ui.view">
+        <field name="name">rk.production.plan.list</field>
+        <field name="model">rk.production.plan</field>
+        <field name="arch" type="xml">
+            <list string="Production plans">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="kitchen_id"/>
+                <field name="total_qty"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_production_plan_form" model="ir.ui.view">
+        <field name="name">rk.production.plan.form</field>
+        <field name="model">rk.production.plan</field>
+        <field name="arch" type="xml">
+            <form string="Production plan">
+                <header>
+                    <button name="action_consolidate" type="object" string="Consolidate indents" class="btn-secondary"/>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_create_manufacturing_orders" type="object" string="Create manufacturing orders" class="btn-primary" invisible="state != 'confirmed'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="kitchen_id"/>
+                        </group>
+                        <group>
+                            <field name="total_qty"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Items" name="items">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="bom_id" options="{'no_create': True}"/>
+                                    <field name="mo_id" readonly="1"/>
+                                    <field name="mo_state" widget="badge"/>
+                                    <button name="action_open_mo" type="object" string="MO" icon="fa-external-link" invisible="not mo_id"/>
+                                    <field name="uom_id" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Indents" name="indents">
+                            <field name="indent_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="outlet_id"/>
+                                    <field name="date_required"/>
+                                    <field name="total_approved"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="action_rk_production_plan" model="ir.actions.act_window">
+        <field name="name">Production plans</field>
+        <field name="res_model">rk.production.plan</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

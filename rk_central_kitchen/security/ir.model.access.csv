@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rk_par_level_user,rk.par.level.user,model_rk_par_level,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_par_level_manager,rk.par.level.manager,model_rk_par_level,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_indent_user,rk.indent.user,model_rk_indent,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_indent_manager,rk.indent.manager,model_rk_indent,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_indent_line_user,rk.indent.line.user,model_rk_indent_line,rk_restaurant_core.group_rk_user,1,1,1,1
+access_rk_plan_user,rk.production.plan.user,model_rk_production_plan,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_plan_manager,rk.production.plan.manager,model_rk_production_plan,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_plan_line_user,rk.production.plan.line.user,model_rk_production_plan_line,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_plan_line_manager,rk.production.plan.line.manager,model_rk_production_plan_line,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_dispatch_user,rk.dispatch.user,model_rk_dispatch,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_dispatch_manager,rk.dispatch.manager,model_rk_dispatch,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_dispatch_line_user,rk.dispatch.line.user,model_rk_dispatch_line,rk_restaurant_core.group_rk_user,1,1,1,1

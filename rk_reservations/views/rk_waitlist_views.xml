@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_waitlist_list" model="ir.ui.view">
+        <field name="name">rk.waitlist.list</field>
+        <field name="model">rk.waitlist</field>
+        <field name="arch" type="xml">
+            <list string="Waitlist" editable="bottom">
+                <field name="arrived_at"/>
+                <field name="guest_name"/>
+                <field name="phone"/>
+                <field name="party_size" sum="Covers"/>
+                <field name="quoted_minutes"/>
+                <field name="actual_minutes" readonly="1" digits="[5,0]"/>
+                <field name="state" widget="badge"/>
+                <button name="action_seat" type="object" string="Seat" icon="fa-check" invisible="state != 'waiting'"/>
+                <button name="action_left" type="object" string="Left" icon="fa-times" invisible="state != 'waiting'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_waitlist_search" model="ir.ui.view">
+        <field name="name">rk.waitlist.search</field>
+        <field name="model">rk.waitlist</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="guest_name"/>
+                <filter name="filter_waiting" string="Waiting" domain="[('state', '=', 'waiting')]"/>
+                <group>
+                    <filter name="group_outlet" string="Outlet" context="{'group_by': 'outlet_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_rk_waitlist" model="ir.actions.act_window">
+        <field name="name">Waitlist</field>
+        <field name="res_model">rk.waitlist</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rk_waitlist_search"/>
+        <field name="context">{'search_default_filter_waiting': 1}</field>
+    </record>
+</odoo>

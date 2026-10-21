@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_config_form_rk" model="ir.ui.view">
+        <field name="name">pos.config.form.rk</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="%(rk_restaurant_core.action_rk_outlet)d" type="action"
+                            string="Open outlet record" class="btn-secondary"
+                            invisible="not rk_outlet_id"/>
+                </header>
+            </xpath>
+            <xpath expr="//div[@id='title']" position="after">
+                <group string="Restaurant Kit">
+                    <group>
+                        <field name="rk_outlet_id" options="{'no_create': True}"/>
+                        <field name="rk_brand_id"/>
+                        <field name="rk_format"/>
+                    </group>
+                    <group>
+                        <field name="rk_manager_id"/>
+                        <field name="rk_seats"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_dispatch_list" model="ir.ui.view">
+        <field name="name">rk.dispatch.list</field>
+        <field name="model">rk.dispatch</field>
+        <field name="arch" type="xml">
+            <list string="Dispatches" decoration-danger="variance_qty != 0">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="kitchen_id" optional="hide"/>
+                <field name="outlet_id"/>
+                <field name="total_qty"/>
+                <field name="variance_qty"/>
+                <field name="temperature_ok" optional="show"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_dispatch_form" model="ir.ui.view">
+        <field name="name">rk.dispatch.form</field>
+        <field name="model">rk.dispatch</field>
+        <field name="arch" type="xml">
+            <form string="Dispatch">
+                <header>
+                    <button name="action_fill_from_indent" type="object" string="Fill from indent" class="btn-secondary" invisible="state != 'draft'"/>
+                    <button name="action_dispatch" type="object" string="Send" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_confirm_receipt" type="object" string="Confirm receipt" class="btn-primary" invisible="state != 'in_transit'"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="btn-secondary" invisible="state in ('delivered', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_transit,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="kitchen_id"/>
+                            <field name="outlet_id"/>
+                            <field name="indent_id" options="{'no_create': True}"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="transport_reference"/>
+                            <field name="temperature_c"/>
+                            <field name="temperature_ok"/>
+                            <field name="total_qty"/>
+                            <field name="variance_qty"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="product_id"/>
+                            <field name="qty_sent"/>
+                            <field name="qty_received"/>
+                            <field name="variance_qty" readonly="1"/>
+                            <field name="reason"/>
+                            <field name="uom_id" optional="hide"/>
+                        </list>
+                    </field>
+                    <field name="notes" placeholder="Route, driver, seal number…"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="action_rk_dispatch" model="ir.actions.act_window">
+        <field name="name">Dispatches</field>
+        <field name="res_model">rk.dispatch</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

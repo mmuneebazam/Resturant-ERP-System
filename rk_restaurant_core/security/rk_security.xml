@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="module_category_restaurant_kit" model="ir.module.category">
+            <field name="name">Restaurant Kit</field>
+            <field name="description">Restaurant operations, costing and franchise access.</field>
+            <field name="sequence">30</field>
+        </record>
+
+        <!-- Odoo 19 groups belong to a privilege, which belongs to a module category -->
+        <record id="privilege_restaurant_kit" model="res.groups.privilege">
+            <field name="name">Restaurant Kit</field>
+            <field name="sequence">30</field>
+            <field name="category_id" ref="module_category_restaurant_kit"/>
+        </record>
+
+        <record id="group_rk_user" model="res.groups">
+            <field name="name">Restaurant User</field>
+            <field name="privilege_id" ref="privilege_restaurant_kit"/>
+            <field name="comment">Daily restaurant operations: outlets, recipes, indents and menus.</field>
+        </record>
+
+        <record id="group_rk_manager" model="res.groups">
+            <field name="name">Restaurant Manager</field>
+            <field name="privilege_id" ref="privilege_restaurant_kit"/>
+            <field name="implied_ids" eval="[(4, ref('group_rk_user'))]"/>
+            <field name="comment">Outlet and brand managers: approvals, price changes and scorecards.</field>
+        </record>
+
+        <record id="group_rk_finance" model="res.groups">
+            <field name="name">Restaurant Finance</field>
+            <field name="privilege_id" ref="privilege_restaurant_kit"/>
+            <field name="implied_ids" eval="[(4, ref('group_rk_manager'))]"/>
+            <field name="comment">Royalty statements, settlements and P&amp;L sign-off.</field>
+        </record>
+
+        <!-- Outlet managers only see outlets of companies they can read -->
+        <record id="rule_rk_outlet_company" model="ir.rule">
+            <field name="name">Outlets: multi-company</field>
+            <field name="model_id" ref="model_rk_outlet"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="global" eval="True"/>
+        </record>
+
+        <record id="rule_rk_brand_company" model="ir.rule">
+            <field name="name">Brands: multi-company</field>
+            <field name="model_id" ref="model_rk_brand"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="global" eval="True"/>
+        </record>
+
+        <!-- A franchisee (portal operator) only sees the outlets it operates.
+             Enforced for the internal group as well so area managers can be
+             scoped by outlet without a new module. -->
+        <record id="rule_rk_outlet_manager_scope" model="ir.rule">
+            <field name="name">Outlets: manager sees own outlets only</field>
+            <field name="model_id" ref="model_rk_outlet"/>
+            <field name="groups" eval="[(4, ref('group_rk_user'))]"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

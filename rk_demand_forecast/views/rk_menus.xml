@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_forecast" name="Forecasting"
+              parent="rk_restaurant_core.menu_rk_root" sequence="70"/>
+    <menuitem id="menu_rk_forecast_lines" name="Forecasts" parent="menu_rk_forecast" action="action_rk_forecast" sequence="10"/>
+    <menuitem id="menu_rk_forecast_generate" name="Generate" parent="menu_rk_forecast" action="action_rk_forecast_generate" sequence="20"/>
+</odoo>

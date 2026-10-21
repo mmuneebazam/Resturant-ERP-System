@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Brands -->
+    <record id="brand_blaze" model="rk.brand">
+        <field name="name">Blaze Burger</field>
+        <field name="code">BLZ</field>
+        <field name="sequence">10</field>
+        <field name="color">1</field>
+        <field name="target_food_cost_pct">32.0</field>
+        <field name="target_labour_cost_pct">24.0</field>
+        <field name="target_prime_cost_pct">58.0</field>
+    </record>
+    <record id="brand_saffron" model="rk.brand">
+        <field name="name">Saffron Table</field>
+        <field name="code">SAF</field>
+        <field name="sequence">20</field>
+        <field name="color">4</field>
+        <field name="target_food_cost_pct">30.0</field>
+        <field name="target_labour_cost_pct">27.0</field>
+        <field name="target_prime_cost_pct">59.0</field>
+    </record>
+    <record id="brand_brew" model="rk.brand">
+        <field name="name">Brew &amp; Bean</field>
+        <field name="code">BRW</field>
+        <field name="sequence">30</field>
+        <field name="color">6</field>
+        <field name="target_food_cost_pct">26.0</field>
+        <field name="target_labour_cost_pct">28.0</field>
+        <field name="target_prime_cost_pct">55.0</field>
+    </record>
+
+    <!-- Channels -->
+    <record id="channel_dine_in" model="rk.channel">
+        <field name="name">Dine-in</field>
+        <field name="code">DINE</field>
+        <field name="channel_type">dine_in</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="channel_takeaway" model="rk.channel">
+        <field name="name">Takeaway</field>
+        <field name="code">TAKE</field>
+        <field name="channel_type">takeaway</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="channel_delivery" model="rk.channel">
+        <field name="name">Own delivery</field>
+        <field name="code">DELV</field>
+        <field name="channel_type">delivery</field>
+        <field name="commission_pct">0.0</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="channel_aggregator_1" model="rk.channel">
+        <field name="name">Talabat</field>
+        <field name="code">TALABAT</field>
+        <field name="channel_type">aggregator</field>
+        <field name="commission_pct">18.0</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="channel_aggregator_2" model="rk.channel">
+        <field name="name">Deliveroo</field>
+        <field name="code">DELIVEROO</field>
+        <field name="channel_type">aggregator</field>
+        <field name="commission_pct">22.0</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="channel_catering" model="rk.channel">
+        <field name="name">Catering</field>
+        <field name="code">CATER</field>
+        <field name="channel_type">catering</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="channel_franchise" model="rk.channel">
+        <field name="name">Franchise</field>
+        <field name="code">FRAN</field>
+        <field name="channel_type">franchise</field>
+        <field name="commission_pct">0.0</field>
+        <field name="sequence">70</field>
+    </record>
+
+    <!-- Day-parts -->
+    <record id="daypart_breakfast" model="rk.daypart">
+        <field name="name">Breakfast</field>
+        <field name="code">BRK</field>
+        <field name="hour_from">7.0</field>
+        <field name="hour_to">11.0</field>
+        <field name="sequence">10</field>
+        <field name="color">6</field>
+    </record>
+    <record id="daypart_lunch" model="rk.daypart">
+        <field name="name">Lunch</field>
+        <field name="code">LUN</field>
+        <field name="hour_from">11.0</field>
+        <field name="hour_to">16.0</field>
+        <field name="sequence">20</field>
+        <field name="color">3</field>
+    </record>
+    <record id="daypart_dinner" model="rk.daypart">
+        <field name="name">Dinner</field>
+        <field name="code">DIN</field>
+        <field name="hour_from">16.0</field>
+        <field name="hour_to">23.0</field>
+        <field name="sequence">30</field>
+        <field name="color">4</field>
+    </record>
+    <record id="daypart_late" model="rk.daypart">
+        <field name="name">Late night</field>
+        <field name="code">LATE</field>
+        <field name="hour_from">23.0</field>
+        <field name="hour_to">3.0</field>
+        <field name="sequence">40</field>
+        <field name="color">2</field>
+    </record>
+</odoo>

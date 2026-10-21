@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_finance" name="Finance"
+              parent="rk_restaurant_core.menu_rk_root" sequence="88"/>
+    <menuitem id="menu_rk_pnl" name="Outlet P&amp;L" parent="menu_rk_finance" action="action_rk_pnl_period" sequence="10"/>
+    <menuitem id="menu_rk_cash_variance" name="Cash variance" parent="menu_rk_finance" action="action_rk_cash_variance" sequence="20"/>
+</odoo>

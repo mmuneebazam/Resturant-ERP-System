@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_root"
+              name="Restaurant Kit"
+              web_icon="rk_restaurant_core,static/description/icon.png"
+              sequence="12"/>
+
+    <menuitem id="menu_rk_operations" name="Outlets"
+              parent="menu_rk_root" action="action_rk_outlet" sequence="10"/>
+
+    <menuitem id="menu_rk_config" name="Configuration"
+              parent="menu_rk_root" sequence="90"
+              groups="rk_restaurant_core.group_rk_manager"/>
+
+    <menuitem id="menu_rk_brands" name="Brands" parent="menu_rk_config" action="action_rk_brand" sequence="20"/>
+    <menuitem id="menu_rk_channels" name="Channels" parent="menu_rk_config" action="action_rk_channel" sequence="30"/>
+    <menuitem id="menu_rk_dayparts" name="Day-parts" parent="menu_rk_config" action="action_rk_daypart" sequence="40"/>
+</odoo>

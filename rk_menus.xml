@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_aggregator" name="Aggregators"
+              parent="rk_restaurant_core.menu_rk_root" sequence="80"/>
+    <menuitem id="menu_rk_aggregator_orders" name="Platform orders" parent="menu_rk_aggregator" action="action_rk_aggregator_order" sequence="10"/>
+    <menuitem id="menu_rk_aggregator_settlements" name="Settlements" parent="menu_rk_aggregator" action="action_rk_aggregator_settlement" sequence="20"/>
+    <menuitem id="menu_rk_menu_sync" name="Menu sync" parent="menu_rk_aggregator" action="action_rk_menu_sync" sequence="30"/>
+</odoo>

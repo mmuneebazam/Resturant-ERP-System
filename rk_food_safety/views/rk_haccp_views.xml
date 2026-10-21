@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_haccp_check_list" model="ir.ui.view">
+        <field name="name">rk.haccp.check.list</field>
+        <field name="model">rk.haccp.check</field>
+        <field name="arch" type="xml">
+            <list string="HACCP checks" decoration-danger="state == 'fail'" decoration-success="state == 'pass'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="outlet_id"/>
+                <field name="checklist_id"/>
+                <field name="user_id"/>
+                <field name="failure_count"/>
+                <field name="state" widget="badge" decoration-danger="state == 'fail'" decoration-success="state == 'pass'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_haccp_check_form" model="ir.ui.view">
+        <field name="name">rk.haccp.check.form</field>
+        <field name="model">rk.haccp.check</field>
+        <field name="arch" type="xml">
+            <form string="HACCP check">
+                <header>
+                    <button name="action_load_checkpoints" type="object" string="Load checkpoints" class="btn-secondary" invisible="state != 'draft'"/>
+                    <button name="action_validate" type="object" string="Validate" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_reset_draft" type="object" string="Reopen" class="btn-secondary" invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,pass,fail"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="checklist_id"/>
+                            <field name="outlet_id"/>
+                            <field name="date"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="failure_count"/>
+                            <field name="verified_by_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom" decoration-danger="not is_ok">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="is_temperature"/>
+                            <field name="temp_min" invisible="not is_temperature"/>
+                            <field name="temp_max" invisible="not is_temperature"/>
+                            <field name="temp_value" invisible="not is_temperature"/>
+                            <field name="is_ok" widget="boolean_toggle" readonly="1"/>
+                            <field name="note"/>
+                            <field name="instruction" optional="hide"/>
+                        </list>
+                    </field>
+                    <field name="corrective_action" placeholder="If anything failed: what did you do about it?"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_rk_haccp_check_search" model="ir.ui.view">
+        <field name="name">rk.haccp.check.search</field>
+        <field name="model">rk.haccp.check</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="outlet_id"/>
+                <filter name="filter_fail" string="Failed" domain="[('state', '=', 'fail')]"/>
+                <filter name="filter_today" string="Today" domain="[('date', '&gt;=', (context_today()).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <group>
+                    <filter name="group_outlet" string="Outlet" context="{'group_by': 'outlet_id'}"/>
+                    <filter name="group_checklist" string="Checklist" context="{'group_by': 'checklist_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_rk_haccp_check" model="ir.actions.act_window">
+        <field name="name">HACCP checks</field>
+        <field name="res_model">rk.haccp.check</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rk_haccp_check_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Run a checklist</p>
+            <p>Temperature readings outside the range fail the check and require a corrective action.</p>
+        </field>
+    </record>
+
+    <record id="view_rk_haccp_checklist_list" model="ir.ui.view">
+        <field name="name">rk.haccp.checklist.list</field>
+        <field name="model">rk.haccp.checklist</field>
+        <field name="arch" type="xml">
+            <list string="Checklists">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="frequency"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_haccp_checklist_form" model="ir.ui.view">
+        <field name="name">rk.haccp.checklist.form</field>
+        <field name="model">rk.haccp.checklist</field>
+        <field name="arch" type="xml">
+            <form string="Checklist">
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="frequency"/>
+                            <field name="outlet_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="instructions" placeholder="Who runs it, when, and what to do on failure."/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="is_temperature"/>
+                            <field name="temp_min" invisible="not is_temperature"/>
+                            <field name="temp_max" invisible="not is_temperature"/>
+                            <field name="instruction"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_rk_haccp_checklist" model="ir.actions.act_window">
+        <field name="name">Checklists</field>
+        <field name="res_model">rk.haccp.checklist</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

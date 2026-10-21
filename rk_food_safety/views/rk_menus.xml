@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_food_safety" name="Food safety"
+              parent="rk_restaurant_core.menu_rk_root" sequence="60"/>
+    <menuitem id="menu_rk_haccp_checks" name="HACCP checks" parent="menu_rk_food_safety" action="action_rk_haccp_check" sequence="10"/>
+    <menuitem id="menu_rk_temperature" name="Temperature log" parent="menu_rk_food_safety" action="action_rk_temperature_log" sequence="20"/>
+    <menuitem id="menu_rk_recalls" name="Recalls" parent="menu_rk_food_safety" action="action_rk_recall" sequence="30"/>
+    <menuitem id="menu_rk_haccp_checklists" name="Checklists" parent="rk_restaurant_core.menu_rk_config" action="action_rk_haccp_checklist" sequence="70" groups="rk_restaurant_core.group_rk_manager"/>
+</odoo>

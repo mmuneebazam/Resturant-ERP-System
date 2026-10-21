@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rk_haccp_checklist_user,rk.haccp.checklist.user,model_rk_haccp_checklist,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_haccp_checklist_manager,rk.haccp.checklist.manager,model_rk_haccp_checklist,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_haccp_checklist_line_user,rk.haccp.checklist.line.user,model_rk_haccp_checklist_line,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_haccp_checklist_line_manager,rk.haccp.checklist.line.manager,model_rk_haccp_checklist_line,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_haccp_check_user,rk.haccp.check.user,model_rk_haccp_check,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_haccp_check_manager,rk.haccp.check.manager,model_rk_haccp_check,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_haccp_check_line_user,rk.haccp.check.line.user,model_rk_haccp_check_line,rk_restaurant_core.group_rk_user,1,1,1,1
+access_rk_temperature_log_user,rk.temperature.log.user,model_rk_temperature_log,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_temperature_log_manager,rk.temperature.log.manager,model_rk_temperature_log,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_recall_user,rk.recall.user,model_rk_recall,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_recall_manager,rk.recall.manager,model_rk_recall,rk_restaurant_core.group_rk_manager,1,1,1,1

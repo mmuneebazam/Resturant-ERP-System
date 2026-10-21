@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_cash_variance_list" model="ir.ui.view">
+        <field name="name">rk.cash.variance.list</field>
+        <field name="model">rk.cash.variance</field>
+        <field name="arch" type="xml">
+            <list string="Cash variance" decoration-danger="abs(variance) &gt; tolerance">
+                <field name="date"/>
+                <field name="outlet_id"/>
+                <field name="session_id"/>
+                <field name="expected_cash"/>
+                <field name="counted_cash"/>
+                <field name="variance" sum="Variance"/>
+                <field name="tolerance"/>
+                <field name="state" widget="badge"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_cash_variance_form" model="ir.ui.view">
+        <field name="name">rk.cash.variance.form</field>
+        <field name="model">rk.cash.variance</field>
+        <field name="arch" type="xml">
+            <form string="Cash variance">
+                <header>
+                    <button name="action_submit" type="object" string="Submit" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_explain" type="object" string="Explain" class="btn-primary" invisible="state != 'open'"/>
+                    <button name="action_approve" type="object" string="Approve" class="btn-primary" invisible="state != 'explained'"/>
+                    <button name="action_reset_draft" type="object" string="Reset" class="btn-secondary" invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,explained,approved"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="outlet_id"/>
+                            <field name="date"/>
+                            <field name="session_id"/>
+                        </group>
+                        <group>
+                            <field name="expected_cash"/>
+                            <field name="counted_cash"/>
+                            <field name="variance"/>
+                            <field name="variance_pct"/>
+                            <field name="tolerance"/>
+                            <field name="approved_by_id"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="explanation" placeholder="Counted twice, paid a supplier from the drawer, till float difference…"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="action_rk_cash_variance" model="ir.actions.act_window">
+        <field name="name">Cash variance</field>
+        <field name="res_model">rk.cash.variance</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

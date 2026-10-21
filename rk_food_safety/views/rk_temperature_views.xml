@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_temperature_log_list" model="ir.ui.view">
+        <field name="name">rk.temperature.log.list</field>
+        <field name="model">rk.temperature.log</field>
+        <field name="arch" type="xml">
+            <list string="Temperature log" decoration-danger="not is_ok" editable="bottom">
+                <field name="date"/>
+                <field name="outlet_id"/>
+                <field name="equipment"/>
+                <field name="equipment_name"/>
+                <field name="value"/>
+                <field name="temp_min"/>
+                <field name="temp_max"/>
+                <field name="is_ok" widget="boolean_toggle" readonly="1"/>
+                <field name="source"/>
+                <field name="corrective_action"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_temperature_log_search" model="ir.ui.view">
+        <field name="name">rk.temperature.log.search</field>
+        <field name="model">rk.temperature.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="outlet_id"/>
+                <field name="equipment_name"/>
+                <filter name="filter_breach" string="Out of range" domain="[('is_ok', '=', False)]"/>
+                <filter name="filter_today" string="Today" domain="[('date', '&gt;=', (context_today()).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <group>
+                    <filter name="group_outlet" string="Outlet" context="{'group_by': 'outlet_id'}"/>
+                    <filter name="group_equipment" string="Equipment" context="{'group_by': 'equipment'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_rk_temperature_log" model="ir.actions.act_window">
+        <field name="name">Temperature log</field>
+        <field name="res_model">rk.temperature.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rk_temperature_log_search"/>
+    </record>
+</odoo>

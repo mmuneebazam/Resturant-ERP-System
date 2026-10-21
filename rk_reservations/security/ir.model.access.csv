@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rk_reservation_user,rk.reservation.user,model_rk_reservation,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_reservation_manager,rk.reservation.manager,model_rk_reservation,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_waitlist_user,rk.waitlist.user,model_rk_waitlist,rk_restaurant_core.group_rk_user,1,1,1,1

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_rk_haccp_check" model="ir.sequence">
+        <field name="name">HACCP check</field>
+        <field name="code">rk.haccp.check</field>
+        <field name="prefix">HACCP/%(year)s/</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="seq_rk_recall" model="ir.sequence">
+        <field name="name">Recall</field>
+        <field name="code">rk.recall</field>
+        <field name="prefix">RCL/%(year)s/</field>
+        <field name="padding">3</field>
+    </record>
+
+    <record id="checklist_opening" model="rk.haccp.checklist">
+        <field name="name">Opening check — cold chain</field>
+        <field name="code">OPEN-COLD</field>
+        <field name="frequency">daily</field>
+        <field name="sequence">10</field>
+        <field name="instructions">Complete before service. Any reading outside range: move stock, log a corrective action, notify the manager.</field>
+        <field name="line_ids" eval="[
+            (0, 0, {'sequence': 10, 'name': 'Walk-in chiller', 'is_temperature': True, 'temp_min': 0.0, 'temp_max': 5.0}),
+            (0, 0, {'sequence': 20, 'name': 'Walk-in freezer', 'is_temperature': True, 'temp_min': -22.0, 'temp_max': -18.0}),
+            (0, 0, {'sequence': 30, 'name': 'Prep fridge (line)', 'is_temperature': True, 'temp_min': 0.0, 'temp_max': 5.0}),
+            (0, 0, {'sequence': 40, 'name': 'Hot hold cabinet', 'is_temperature': True, 'temp_min': 63.0, 'temp_max': 90.0}),
+            (0, 0, {'sequence': 50, 'name': 'Handwash stations stocked', 'is_temperature': False}),
+            (0, 0, {'sequence': 60, 'name': 'Sanitiser concentration checked', 'is_temperature': False}),
+        ]"/>
+    </record>
+
+    <record id="checklist_closing" model="rk.haccp.checklist">
+        <field name="name">Closing check — hygiene and storage</field>
+        <field name="code">CLOSE-HYG</field>
+        <field name="frequency">daily</field>
+        <field name="sequence">20</field>
+        <field name="line_ids" eval="[
+            (0, 0, {'sequence': 10, 'name': 'All food covered and labelled', 'is_temperature': False}),
+            (0, 0, {'sequence': 20, 'name': 'FIFO rotation verified', 'is_temperature': False}),
+            (0, 0, {'sequence': 30, 'name': 'Blast chiller cycle complete', 'is_temperature': False}),
+            (0, 0, {'sequence': 40, 'name': 'Waste removed and bins sanitised', 'is_temperature': False}),
+            (0, 0, {'sequence': 50, 'name': 'Hot hold emptied and cleaned', 'is_temperature': False}),
+        ]"/>
+    </record>
+
+    <record id="checklist_receiving" model="rk.haccp.checklist">
+        <field name="name">Goods receiving</field>
+        <field name="code">RECEIVE</field>
+        <field name="frequency">per_shift</field>
+        <field name="sequence">30</field>
+        <field name="line_ids" eval="[
+            (0, 0, {'sequence': 10, 'name': 'Chilled delivery temperature', 'is_temperature': True, 'temp_min': 0.0, 'temp_max': 5.0}),
+            (0, 0, {'sequence': 20, 'name': 'Frozen delivery temperature', 'is_temperature': True, 'temp_min': -25.0, 'temp_max': -15.0}),
+            (0, 0, {'sequence': 30, 'name': 'Vehicle clean and pest free', 'is_temperature': False}),
+            (0, 0, {'sequence': 40, 'name': 'Labels, dates and allergens checked', 'is_temperature': False}),
+        ]"/>
+    </record>
+</odoo>

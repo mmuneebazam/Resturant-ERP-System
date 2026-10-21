@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_channel_list" model="ir.ui.view">
+        <field name="name">rk.channel.list</field>
+        <field name="model">rk.channel</field>
+        <field name="arch" type="xml">
+            <list string="Channels" decoration-muted="not active">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="channel_type"/>
+                <field name="commission_pct" widget="percentage"/>
+                <field name="requires_settlement"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rk_channel_form" model="ir.ui.view">
+        <field name="name">rk.channel.form</field>
+        <field name="model">rk.channel</field>
+        <field name="arch" type="xml">
+            <form string="Channel">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Talabat"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="channel_type"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="commission_pct" widget="percentage"/>
+                            <field name="requires_settlement"/>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Contract terms, settlement cycle, contacts…"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rk_channel" model="ir.actions.act_window">
+        <field name="name">Channels</field>
+        <field name="res_model">rk.channel</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

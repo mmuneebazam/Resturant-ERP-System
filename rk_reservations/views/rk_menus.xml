@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_front_of_house" name="Front of house"
+              parent="rk_restaurant_core.menu_rk_root" sequence="15"/>
+    <menuitem id="menu_rk_reservations" name="Reservations" parent="menu_rk_front_of_house" action="action_rk_reservation" sequence="10"/>
+    <menuitem id="menu_rk_waitlist" name="Waitlist" parent="menu_rk_front_of_house" action="action_rk_waitlist" sequence="20"/>
+</odoo>

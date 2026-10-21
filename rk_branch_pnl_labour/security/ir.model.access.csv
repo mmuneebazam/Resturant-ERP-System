@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rk_pnl_user,rk.pnl.period.user,model_rk_pnl_period,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_pnl_manager,rk.pnl.period.manager,model_rk_pnl_period,rk_restaurant_core.group_rk_manager,1,1,1,0
+access_rk_pnl_finance,rk.pnl.period.finance,model_rk_pnl_period,rk_restaurant_core.group_rk_finance,1,1,1,1
+access_rk_pnl_labour_line_user,rk.pnl.labour.line.user,model_rk_pnl_labour_line,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_pnl_labour_line_finance,rk.pnl.labour.line.finance,model_rk_pnl_labour_line,rk_restaurant_core.group_rk_finance,1,1,1,1
+access_rk_cash_variance_user,rk.cash.variance.user,model_rk_cash_variance,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_cash_variance_manager,rk.cash.variance.manager,model_rk_cash_variance,rk_restaurant_core.group_rk_manager,1,1,1,1

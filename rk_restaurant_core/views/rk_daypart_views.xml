@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_daypart_list" model="ir.ui.view">
+        <field name="name">rk.daypart.list</field>
+        <field name="model">rk.daypart</field>
+        <field name="arch" type="xml">
+            <list string="Day-parts" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="hour_from" widget="float_time"/>
+                <field name="hour_to" widget="float_time"/>
+                <field name="overnight"/>
+                <field name="color" widget="color_picker" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rk_daypart_form" model="ir.ui.view">
+        <field name="name">rk.daypart.form</field>
+        <field name="model">rk.daypart</field>
+        <field name="arch" type="xml">
+            <form string="Day-part">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Dinner"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <label for="hour_from" string="Trading window"/>
+                            <div class="o_row">
+                                <field name="hour_from" widget="float_time"/>
+                                <span>to</span>
+                                <field name="hour_to" widget="float_time"/>
+                            </div>
+                            <field name="overnight"/>
+                        </group>
+                        <group string="Applies to">
+                            <field name="config_ids" widget="many2many_tags" string="POS profiles"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rk_daypart" model="ir.actions.act_window">
+        <field name="name">Day-parts</field>
+        <field name="res_model">rk.daypart</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

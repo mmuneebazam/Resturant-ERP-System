@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_aggregator_settlement_list" model="ir.ui.view">
+        <field name="name">rk.aggregator.settlement.list</field>
+        <field name="model">rk.aggregator.settlement</field>
+        <field name="arch" type="xml">
+            <list string="Settlements" decoration-danger="state == 'disputed'">
+                <field name="name"/>
+                <field name="platform_id"/>
+                <field name="period_start"/>
+                <field name="period_end"/>
+                <field name="reported_gross" sum="Reported"/>
+                <field name="computed_gross" sum="Computed"/>
+                <field name="gross_difference" sum="Difference"/>
+                <field name="state" widget="badge"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_aggregator_settlement_form" model="ir.ui.view">
+        <field name="name">rk.aggregator.settlement.form</field>
+        <field name="model">rk.aggregator.settlement</field>
+        <field name="arch" type="xml">
+            <form string="Settlement">
+                <header>
+                    <button name="action_collect_orders" type="object" string="Collect orders" class="btn-primary" invisible="state == 'closed'"/>
+                    <button name="action_close" type="object" string="Close" class="btn-secondary" invisible="state == 'closed'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="platform_id"/>
+                            <field name="period_start"/>
+                            <field name="period_end"/>
+                            <field name="outlet_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="Platform report">
+                            <field name="reported_gross"/>
+                            <field name="reported_commission"/>
+                            <field name="reported_net"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group string="Our records">
+                            <field name="computed_gross"/>
+                            <field name="computed_commission"/>
+                            <field name="gross_difference"/>
+                            <field name="order_count"/>
+                        </group>
+                    </group>
+                    <field name="order_ids">
+                        <list>
+                            <field name="received_at"/>
+                            <field name="external_ref"/>
+                            <field name="amount_total"/>
+                            <field name="commission_amount"/>
+                            <field name="state"/>
+                        </list>
+                    </field>
+                    <field name="note"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_rk_aggregator_settlement" model="ir.actions.act_window">
+        <field name="name">Settlements</field>
+        <field name="res_model">rk.aggregator.settlement</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

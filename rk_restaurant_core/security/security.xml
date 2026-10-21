@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_rk" model="ir.module.category">
+        <field name="name">Restaurant Kit</field>
+        <field name="description">Access rights for the restaurant management modules.</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="privilege_rk" model="res.groups.privilege">
+        <field name="name">Restaurant Kit</field>
+        <field name="category_id" ref="module_category_rk"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="group_rk_user" model="res.groups">
+        <field name="name">Outlet User</field>
+        <field name="privilege_id" ref="privilege_rk"/>
+        <field name="comment">Operational access: recipes, waste, KDS, reservations, food safety.</field>
+    </record>
+
+    <record id="group_rk_manager" model="res.groups">
+        <field name="name">Outlet Manager</field>
+        <field name="privilege_id" ref="privilege_rk"/>
+        <field name="implied_ids" eval="[(4, ref('group_rk_user'))]"/>
+        <field name="comment">Approves waste, indents, prices, promotions and sees the branch P&amp;L.</field>
+    </record>
+
+    <record id="group_rk_finance" model="res.groups">
+        <field name="name">Group Finance</field>
+        <field name="privilege_id" ref="privilege_rk"/>
+        <field name="implied_ids" eval="[(4, ref('group_rk_manager'))]"/>
+        <field name="comment">Franchise royalties, settlements, P&amp;L approval, cost control.</field>
+    </record>
+
+    <!-- The administrator needs the whole kit, otherwise a fresh install is unusable. -->
+    <record id="base.user_admin" model="res.users">
+        <field name="group_ids" eval="[(4, ref('group_rk_finance'))]"/>
+    </record>
+</odoo>

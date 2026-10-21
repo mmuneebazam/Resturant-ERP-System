@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="brand_blaze" model="rk.brand">
+            <field name="name">Blaze Burger Co.</field>
+            <field name="code">BLAZE</field>
+            <field name="sequence">10</field>
+            <field name="color">1</field>
+            <field name="food_cost_target_pct">29.0</field>
+            <field name="labour_cost_target_pct">26.0</field>
+            <field name="description">QSR burger brand: counter, kiosk and heavy delivery mix.</field>
+        </record>
+        <record id="brand_saffron" model="rk.brand">
+            <field name="name">Saffron House</field>
+            <field name="code">SAFR</field>
+            <field name="sequence">20</field>
+            <field name="color">3</field>
+            <field name="food_cost_target_pct">32.0</field>
+            <field name="labour_cost_target_pct">30.0</field>
+            <field name="description">Casual dining, table service, catering arm and central kitchen.</field>
+        </record>
+        <record id="brand_verde" model="rk.brand">
+            <field name="name">Verde &amp; Vine</field>
+            <field name="code">VRD</field>
+            <field name="sequence">30</field>
+            <field name="color">4</field>
+            <field name="food_cost_target_pct">35.0</field>
+            <field name="labour_cost_target_pct">34.0</field>
+            <field name="description">Fine dining with tasting menus, wine pairing and guest profiles.</field>
+        </record>
+        <record id="brand_crumb" model="rk.brand">
+            <field name="name">Daily Crumb Bakehouse</field>
+            <field name="code">CRUMB</field>
+            <field name="sequence">40</field>
+            <field name="color">5</field>
+            <field name="food_cost_target_pct">27.0</field>
+            <field name="labour_cost_target_pct">31.0</field>
+            <field name="description">Café and bakery: batch production, shelf life, end-of-day markdown.</field>
+        </record>
+        <record id="brand_wok" model="rk.brand">
+            <field name="name">Wok Window</field>
+            <field name="code">WOK</field>
+            <field name="sequence">50</field>
+            <field name="color">6</field>
+            <field name="food_cost_target_pct">33.0</field>
+            <field name="labour_cost_target_pct">22.0</field>
+            <field name="description">Delivery-only virtual brand run from the cloud kitchen.</field>
+        </record>
+    </data>
+</odoo>

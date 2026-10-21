@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_pnl_period_list" model="ir.ui.view">
+        <field name="name">rk.pnl.period.list</field>
+        <field name="model">rk.pnl.period</field>
+        <field name="arch" type="xml">
+            <list string="Outlet P&amp;L" decoration-danger="status == 'alert'" decoration-warning="status == 'watch'">
+                <field name="name"/>
+                <field name="outlet_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="sales" sum="Sales"/>
+                <field name="food_cost_pct"/>
+                <field name="labour_pct"/>
+                <field name="prime_cost_pct" decoration-bf="1"/>
+                <field name="gross_profit" sum="Gross profit"/>
+                <field name="status" widget="badge" decoration-success="status == 'ok'" decoration-warning="status == 'watch'" decoration-danger="status == 'alert'"/>
+                <field name="state" widget="badge" optional="hide"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_pnl_period_form" model="ir.ui.view">
+        <field name="name">rk.pnl.period.form</field>
+        <field name="model">rk.pnl.period</field>
+        <field name="arch" type="xml">
+            <form string="Outlet P&amp;L">
+                <header>
+                    <button name="action_compute" type="object" string="Calculate" class="btn-primary" invisible="state == 'approved'"/>
+                    <button name="action_approve" type="object" string="Approve" class="btn-primary" invisible="state != 'calculated'"/>
+                    <button name="action_reset_draft" type="object" string="Reset" class="btn-secondary" invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,calculated,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="outlet_id"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="brand_id"/>
+                        </group>
+                        <group string="Prime cost">
+                            <field name="target_prime_cost_pct"/>
+                            <field name="prime_cost_pct"/>
+                            <field name="status"/>
+                            <field name="labour_hours" widget="float_time"/>
+                        </group>
+                    </group>
+                    <group string="Profit &amp; loss">
+                        <group>
+                            <field name="sales"/>
+                            <field name="order_count"/>
+                            <field name="food_cost"/>
+                            <field name="waste_cost"/>
+                            <field name="labour_cost"/>
+                            <field name="other_cost"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group class="oe_subtotal_footer">
+                            <field name="total_cost"/>
+                            <field name="gross_profit" class="oe_subtotal_footer_separator"/>
+                            <field name="food_cost_pct"/>
+                            <field name="labour_pct"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Labour" name="labour">
+                            <field name="labour_line_ids">
+                                <list>
+                                    <field name="employee_id"/>
+                                    <field name="hours" widget="float_time"/>
+                                    <field name="hourly_rate"/>
+                                    <field name="cost" sum="Labour cost"/>
+                                    <field name="cost_pct"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes"><field name="note"/></page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_rk_pnl_period_search" model="ir.ui.view">
+        <field name="name">rk.pnl.period.search</field>
+        <field name="model">rk.pnl.period</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="outlet_id"/>
+                <filter name="filter_alert" string="Above target" domain="[('status', '=', 'alert')]"/>
+                <filter name="filter_approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                <group>
+                    <filter name="group_outlet" string="Outlet" context="{'group_by': 'outlet_id'}"/>
+                    <filter name="group_month" string="Month" context="{'group_by': 'date_from:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_rk_pnl_period" model="ir.actions.act_window">
+        <field name="name">Outlet P&amp;L</field>
+        <field name="res_model">rk.pnl.period</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rk_pnl_period_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Build an outlet P&amp;L</p>
+            <p>Revenue comes from paid POS orders, costs from recipes, waste, attendance and analytics.</p>
+        </field>
+    </record>
+
+    <record id="view_rk_pnl_pivot" model="ir.ui.view">
+        <field name="name">rk.pnl.period.pivot</field>
+        <field name="model">rk.pnl.period</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="outlet_id" type="row"/>
+                <field name="date_from" type="col" interval="month"/>
+                <field name="sales" type="measure"/>
+                <field name="prime_cost_pct" type="measure"/>
+                <field name="gross_profit" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+</odoo>

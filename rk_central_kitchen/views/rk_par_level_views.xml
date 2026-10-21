@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_par_level_list" model="ir.ui.view">
+        <field name="name">rk.par.level.list</field>
+        <field name="model">rk.par.level</field>
+        <field name="arch" type="xml">
+            <list string="Par levels" editable="bottom" decoration-warning="suggested_qty &gt; 0">
+                <field name="outlet_id"/>
+                <field name="product_id"/>
+                <field name="par_qty"/>
+                <field name="min_qty"/>
+                <field name="qty_on_hand" readonly="1"/>
+                <field name="qty_incoming" readonly="1"/>
+                <field name="average_daily_usage" readonly="1" optional="hide"/>
+                <field name="days_cover" readonly="1" digits="[5,1]"/>
+                <field name="suggested_qty" readonly="1" decoration-bf="1"/>
+                <field name="below_par" column_invisible="True"/>
+                <field name="uom_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_par_level_search" model="ir.ui.view">
+        <field name="name">rk.par.level.search</field>
+        <field name="model">rk.par.level</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <field name="outlet_id"/>
+                <filter name="filter_below" string="Below par" domain="[('below_par', '=', True)]"/>
+                <group>
+                    <filter name="group_outlet" string="Outlet" context="{'group_by': 'outlet_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_rk_par_level" model="ir.actions.act_window">
+        <field name="name">Par levels</field>
+        <field name="res_model">rk.par.level</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rk_par_level_search"/>
+    </record>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="channel_dine_in" model="rk.channel">
+            <field name="name">Dine-in</field>
+            <field name="code">DINEIN</field>
+            <field name="channel_type">dine_in</field>
+            <field name="sequence">10</field>
+            <field name="color">2</field>
+        </record>
+        <record id="channel_takeaway" model="rk.channel">
+            <field name="name">Takeaway / Counter</field>
+            <field name="code">TAKEAWAY</field>
+            <field name="channel_type">takeaway</field>
+            <field name="sequence">20</field>
+            <field name="color">3</field>
+            <field name="packaging_cost_per_order">0.15</field>
+        </record>
+        <record id="channel_kiosk" model="rk.channel">
+            <field name="name">Kiosk / Self-order</field>
+            <field name="code">KIOSK</field>
+            <field name="channel_type">kiosk</field>
+            <field name="sequence">30</field>
+            <field name="color">5</field>
+        </record>
+        <record id="channel_online" model="rk.channel">
+            <field name="name">Own Website &amp; App</field>
+            <field name="code">ONLINE</field>
+            <field name="channel_type">delivery</field>
+            <field name="sequence">40</field>
+            <field name="color">4</field>
+            <field name="commission_pct">2.5</field>
+            <field name="packaging_cost_per_order">0.35</field>
+        </record>
+        <record id="channel_aggregator_1" model="rk.channel">
+            <field name="name">Talabat</field>
+            <field name="code">AGGR01</field>
+            <field name="channel_type">aggregator</field>
+            <field name="platform_name">Talabat</field>
+            <field name="sequence">50</field>
+            <field name="color">1</field>
+            <field name="commission_pct">24.0</field>
+            <field name="packaging_cost_per_order">0.45</field>
+            <field name="requires_settlement" eval="True"/>
+        </record>
+        <record id="channel_aggregator_2" model="rk.channel">
+            <field name="name">Deliveroo</field>
+            <field name="code">AGGR02</field>
+            <field name="channel_type">aggregator</field>
+            <field name="platform_name">Deliveroo</field>
+            <field name="sequence">60</field>
+            <field name="color">6</field>
+            <field name="commission_pct">28.0</field>
+            <field name="packaging_cost_per_order">0.45</field>
+            <field name="requires_settlement" eval="True"/>
+        </record>
+        <record id="channel_catering" model="rk.channel">
+            <field name="name">Catering &amp; Events</field>
+            <field name="code">CATER</field>
+            <field name="channel_type">catering</field>
+            <field name="sequence">70</field>
+            <field name="color">9</field>
+        </record>
+        <record id="channel_franchise" model="rk.channel">
+            <field name="name">Franchise Supply</field>
+            <field name="code">FRANCHISE</field>
+            <field name="channel_type">franchise</field>
+            <field name="sequence">80</field>
+            <field name="color">8</field>
+            <field name="commission_pct">0.0</field>
+        </record>
+    </data>
+</odoo>

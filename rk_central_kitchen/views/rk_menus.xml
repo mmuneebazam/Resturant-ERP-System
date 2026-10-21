@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rk_kitchen" name="Central kitchen"
+              parent="rk_restaurant_core.menu_rk_root" sequence="30"/>
+    <menuitem id="menu_rk_indent" name="Indents" parent="menu_rk_kitchen" action="action_rk_indent" sequence="10"/>
+    <menuitem id="menu_rk_production_plan" name="Production plans" parent="menu_rk_kitchen" action="action_rk_production_plan" sequence="20"/>
+    <menuitem id="menu_rk_dispatch" name="Dispatches" parent="menu_rk_kitchen" action="action_rk_dispatch" sequence="30"/>
+    <menuitem id="menu_rk_par_level" name="Par levels" parent="menu_rk_kitchen" action="action_rk_par_level" sequence="40"/>
+</odoo>

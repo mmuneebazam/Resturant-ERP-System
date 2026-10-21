@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rk_aggregator_platform_user,rk.aggregator.platform.user,model_rk_aggregator_platform,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_aggregator_platform_manager,rk.aggregator.platform.manager,model_rk_aggregator_platform,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_aggregator_order_user,rk.aggregator.order.user,model_rk_aggregator_order,rk_restaurant_core.group_rk_user,1,1,1,0
+access_rk_aggregator_order_manager,rk.aggregator.order.manager,model_rk_aggregator_order,rk_restaurant_core.group_rk_manager,1,1,1,1
+access_rk_aggregator_settlement_user,rk.aggregator.settlement.user,model_rk_aggregator_settlement,rk_restaurant_core.group_rk_user,1,0,0,0
+access_rk_aggregator_settlement_finance,rk.aggregator.settlement.finance,model_rk_aggregator_settlement,rk_restaurant_core.group_rk_finance,1,1,1,1
+access_rk_menu_sync_user,rk.menu.sync.user,model_rk_menu_sync,rk_restaurant_core.group_rk_user,1,1,1,1

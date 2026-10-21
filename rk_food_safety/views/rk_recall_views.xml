@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_recall_list" model="ir.ui.view">
+        <field name="name">rk.recall.list</field>
+        <field name="model">rk.recall</field>
+        <field name="arch" type="xml">
+            <list string="Recalls" decoration-danger="state == 'open'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="lot_reference"/>
+                <field name="reason"/>
+                <field name="severity" widget="badge"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_recall_form" model="ir.ui.view">
+        <field name="name">rk.recall.form</field>
+        <field name="model">rk.recall</field>
+        <field name="arch" type="xml">
+            <form string="Recall">
+                <header>
+                    <button name="action_trace" type="object" string="Trace outlets" class="btn-secondary" invisible="state not in ('draft', 'open')"/>
+                    <button name="action_open" type="object" string="Open recall" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_close" type="object" string="Close" class="btn-primary" invisible="state != 'open'"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="btn-secondary" invisible="state in ('closed', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="product_id"/>
+                            <field name="lot_reference"/>
+                            <field name="supplier_reference"/>
+                        </group>
+                        <group>
+                            <field name="reason"/>
+                            <field name="severity"/>
+                            <field name="recalled_qty"/>
+                            <field name="response_hours"/>
+                            <field name="closed_on" invisible="not closed_on"/>
+                        </group>
+                    </group>
+                    <group string="Affected outlets">
+                        <field name="affected_outlet_ids" widget="many2many_tags" nolabel="1"/>
+                    </group>
+                    <field name="description" placeholder="What happened, what is the risk, who was informed."/>
+                    <field name="action_taken" placeholder="Quarantined, destroyed, returned to supplier…"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="action_rk_recall" model="ir.actions.act_window">
+        <field name="name">Recalls</field>
+        <field name="res_model">rk.recall</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

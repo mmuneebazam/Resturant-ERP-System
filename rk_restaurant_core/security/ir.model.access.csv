@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rk_brand_user,rk.brand.user,model_rk_brand,group_rk_user,1,0,0,0
+access_rk_brand_manager,rk.brand.manager,model_rk_brand,group_rk_manager,1,1,1,0
+access_rk_brand_finance,rk.brand.finance,model_rk_brand,group_rk_finance,1,1,1,1
+access_rk_channel_user,rk.channel.user,model_rk_channel,group_rk_user,1,0,0,0
+access_rk_channel_manager,rk.channel.manager,model_rk_channel,group_rk_manager,1,1,1,0
+access_rk_channel_finance,rk.channel.finance,model_rk_channel,group_rk_finance,1,1,1,1
+access_rk_daypart_user,rk.daypart.user,model_rk_daypart,group_rk_user,1,1,1,0
+access_rk_daypart_manager,rk.daypart.manager,model_rk_daypart,group_rk_manager,1,1,1,1
+access_rk_outlet_user,rk.outlet.user,model_rk_outlet,group_rk_user,1,1,1,0
+access_rk_outlet_manager,rk.outlet.manager,model_rk_outlet,group_rk_manager,1,1,1,1

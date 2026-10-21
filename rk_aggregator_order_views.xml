@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rk_aggregator_order_list" model="ir.ui.view">
+        <field name="name">rk.aggregator.order.list</field>
+        <field name="model">rk.aggregator.order</field>
+        <field name="arch" type="xml">
+            <list string="Platform orders" decoration-muted="state == 'cancelled'">
+                <field name="received_at"/>
+                <field name="external_ref"/>
+                <field name="platform_id"/>
+                <field name="outlet_id"/>
+                <field name="customer_name" optional="hide"/>
+                <field name="amount_total" sum="Gross"/>
+                <field name="commission_amount" sum="Commission"/>
+                <field name="net_amount" sum="Net"/>
+                <field name="state" widget="badge"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rk_aggregator_order_form" model="ir.ui.view">
+        <field name="name">rk.aggregator.order.form</field>
+        <field name="model">rk.aggregator.order</field>
+        <field name="arch" type="xml">
+            <form string="Platform order">
+                <header>
+                    <button name="action_import_to_pos" type="object" string="Import to POS" class="btn-primary"
+                            invisible="state != 'received'"/>
+                    <button name="action_open_pos_order" type="object" string="Open POS order" class="btn-secondary"
+                            invisible="not pos_order_id"/>
+                    <button name="action_reject" type="object" string="Reject" class="btn-secondary"
+                            invisible="state not in ('received', 'imported')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="received,imported"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><label for="name"/><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="platform_id"/>
+                            <field name="channel_id"/>
+                            <field name="outlet_id"/>
+                            <field name="received_at"/>
+                            <field name="customer_name"/>
+                            <field name="customer_note"/>
+                        </group>
+                        <group>
+                            <field name="amount_total"/>
+                            <field name="commission_pct"/>
+                            <field name="commission_amount"/>
+                            <field name="net_amount"/>
+                            <field name="settlement_id" invisible="not settlement_id"/>
+                            <field name="error_message" invisible="not error_message"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Payload" name="payload">
+                            <field name="payload" widget="text" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_rk_aggregator_order_search" model="ir.ui.view">
+        <field name="name">rk.aggregator.order.search</field>
+        <field name="model">rk.aggregator.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="external_ref"/>
+                <field name="platform_id"/>
+                <field name="outlet_id"/>
+                <filter name="filter_received" string="To import" domain="[('state', '=', 'received')]"/>
+                <group>
+                    <filter name="group_platform" string="Platform" context="{'group_by': 'platform_id'}"/>
+                    <filter name="group_outlet" string="Outlet" context="{'group_by': 'outlet_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_rk_aggregator_order" model="ir.actions.act_window">
+        <field name="name">Platform orders</field>
+        <field name="res_model">rk.aggregator.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rk_aggregator_order_search"/>
+    </record>
+</odoo>
